@@ -8,6 +8,7 @@ RUN apt-get update && apt-get -y install apt-utils net-tools apt-transport-https
 
 RUN apt -y update
 RUN apt -y install python3.6
+RUN apt-get install -y libgomp1
 
 ARG OPENSSL_VERSION=1.1.1g
 ARG PYTHON=python3
@@ -46,7 +47,7 @@ RUN apt -y purge --auto-remove libpython2.7 \
 COPY / /sagemaker-sparkml-model-server
 WORKDIR /sagemaker-sparkml-model-server
 
-RUN mvn clean package
+# RUN mvn clean package
 
 RUN cp ./target/sparkml-serving-2.4.jar /usr/local/lib/sparkml-serving-2.4.jar
 RUN cp ./serve.sh /usr/local/bin/serve.sh
